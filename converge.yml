@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: webservers
+  become: true
   roles:
     - role: nginxinc.nginx
 
