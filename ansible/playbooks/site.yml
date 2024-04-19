@@ -1,0 +1,3 @@
+---
+  - import_playbook: nginx_playbook.yml
+  - import_playbook: webservers_playbook.yml

@@ -1,0 +1,11 @@
+[webservers]
+server-1
+server-2
+
+[loadbalancer]
+load-balancer
+
+[all:vars]
+ansible_user=vagrant 
+ansible_ssh_pass=vagrant
+ansible_python_interpreter=/usr/bin/python3

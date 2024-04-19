@@ -1,0 +1,31 @@
+---
+- hosts: all
+  tasks:
+    - name: Install MySQL server and client
+      apt:
+        name:
+          - mysql-server
+          - mysql-client
+        state: present
+
+    - name: Copy MySQL config file to server
+      copy:
+        src: files/mysql.cfg
+        dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+
+    - name: Restart MySQL service
+      systemd:
+        name: mysql
+        state: restarted
+
+    - name: Create Flask app database
+      mysql_db:
+        name: flask_app_db
+        state: present
+
+    - name: Create Flask app database user
+      mysql_user:
+        name: flask_app_user
+        password: "{{ lookup('password', 'credentials/flask_app_user.txt') }}"
+        priv: "flask_app_db.*:ALL"
+        state: present
